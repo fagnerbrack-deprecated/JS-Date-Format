@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Unit Test - JSDateFormat</title>
+		
+		<link rel="stylesheet" href="../qunit/main.css" media="all" charset="UTF-8" />
+		<link rel="stylesheet" href="../qunit/qunit.css" media="all" charset="UTF-8" />
+		
+		<script language="Javascript" type="text/javascript" src="../lib/jquery.1.7.1.js"></script>
+		<script language="Javascript" type="text/javascript" src="../qunit/qunit.js"></script>
+		<script language="Javascript" type="text/javascript" src="../src/utils.js"></script>
+		<script language="Javascript" type="text/javascript" src="../src/JSDateFormat.js"></script>
+
+		
+		<script type="text/javascript" language="Javascript">
+			$(function() {
+				
+				var defaultDateFormat = new JSDateFormat();
+				
+				module("Date Parse");
+				test("29/02/2012 - Leap Year", function() {
+					var date = defaultDateFormat.getDateObj("29/02/2012");
+					
+					same(date.getDate(), 29, "The day is correct");
+					same(date.getMonth(), 1, "The month is correct");
+					same(date.getFullYear(), 2012, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 0, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("26-02-2012", function() {
+					var date = defaultDateFormat.getDateObj("26-02-2012");
+					
+					same(date.getDate(), 26, "The day is correct");
+					same(date.getMonth(), 1, "The month is correct");
+					same(date.getFullYear(), 2012, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 0, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("25/02/2012 00:35", function() {
+					var date = defaultDateFormat.getDateObj("25/02/2012 00:35");
+					
+					same(date.getDate(), 25, "The day is correct");
+					same(date.getMonth(), 1, "The month is correct");
+					same(date.getFullYear(), 2012, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 35, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("26-02-2012 00:59", function(){
+					var date = defaultDateFormat.getDateObj("26-02-2012 00:59");
+					
+					same(date.getDate(), 26, "The day is correct");
+					same(date.getMonth(), 1, "The month is correct");
+					same(date.getFullYear(), 2012, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 59, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("18/10/2011 00:45:54", function(){
+					var date = defaultDateFormat.getDateObj("18/10/2011 00:45:54");
+					
+					same(date.getDate(), 18, "The day is correct");
+					same(date.getMonth(), 9, "The month is correct");
+					same(date.getFullYear(), 2011, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 45, "The minutes are correct");
+					same(date.getSeconds(), 54, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("17-10-2011 00:31:28", function(){
+					var date = defaultDateFormat.getDateObj("17-10-2011 00:31:28");
+					
+					same(date.getDate(), 17, "The day is correct");
+					same(date.getMonth(), 9, "The month is correct");
+					same(date.getFullYear(), 2011, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 31, "The minutes are correct");
+					same(date.getSeconds(), 28, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("09/08/2001 09:07:08 - Date/Hour with zeros at left", function() {
+					var date = defaultDateFormat.getDateObj("09/08/2001 09:07:08");
+					
+					same(date.getDate(), 9, "The day is correct");
+					same(date.getMonth(), 7, "The month is correct");
+					same(date.getFullYear(), 2001, "The year is correct");
+					
+					same(date.getHours(), 9, "The hour is correct");
+					same(date.getMinutes(), 7, "The minutes are correct");
+					same(date.getSeconds(), 8, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("08:07 - Hours/Minutes with zeros at left", function() {
+					var date = defaultDateFormat.getDateObj("08:07");
+					
+					same(date.getDate(), 1, "The day is correct");
+					same(date.getMonth(), 0, "The month is correct");
+					same(date.getFullYear(), 1970, "The year is correct");
+					
+					same(date.getHours(), 8, "The hour is correct");
+					same(date.getMinutes(), 7, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("09:04:08 - Hour, minutes and seconds with zeros at left", function() {
+					var date = defaultDateFormat.getDateObj("09:04:08");
+					
+					same(date.getDate(), 1, "The day is correct");
+					same(date.getMonth(), 0, "The month is correct");
+					same(date.getFullYear(), 1970, "The year is correct");
+					
+					same(date.getHours(), 9, "The hour is correct");
+					same(date.getMinutes(), 4, "The minutes are correct");
+					same(date.getSeconds(), 8, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("23:59:59", function() {
+					var date = defaultDateFormat.getDateObj("23:59:59");
+					
+					same(date.getDate(), 1, "The day is correct");
+					same(date.getMonth(), 0, "The month is correct");
+					same(date.getFullYear(), 1970, "The year is correct");
+					
+					same(date.getHours(), 23, "The hour is correct");
+					same(date.getMinutes(), 59, "The minutes are correct");
+					same(date.getSeconds(), 59, "Os segundos estao corretos");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				test("00:00:00 - Hour reset", function() {
+					var date = defaultDateFormat.getDateObj("00:00:00");
+					
+					same(date.getDate(), 1, "The day is correct");
+					same(date.getMonth(), 0, "The month is correct");
+					same(date.getFullYear(), 1970, "The year is correct");
+					
+					same(date.getHours(), 0, "The hour is correct");
+					same(date.getMinutes(), 0, "The minutes are correct");
+					same(date.getSeconds(), 0, "The seconds are correct");
+					same(date.getMilliseconds(), 0, "The millis are correct");
+				});
+				
+				module("Date Format");
+				test("%d%d/%M%M/%y%y%y%y", function() {
+					var dateFormat = new JSDateFormat("%d%d/%M%M/%y%y%y%y");
+					var dateObj = new Date(1998, 5, 4);
+					var originalDateObj = cloneDate(dateObj);
+					var formatted = dateFormat.format(dateObj);
+					
+					same(formatted, "04/06/1998", "The formatted date is correct");
+					same(originalDateObj, dateObj, "The date must not be modified");
+				});
+				
+				test("%d%d%d-%M%M%M%M-%y%y %H%H:%m%m", function() {
+					var dateFormat = new JSDateFormat("%d%d%d-%M%M%M%M-%y%y %H%H:%m%m");
+					var dateObj = new Date(2012, 10, 30);
+					var originalDateObj = cloneDate(dateObj);
+					var formatted = dateFormat.format(dateObj);
+					var expectedRes = "030-0011-12 00:00";
+					
+					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					same(originalDateObj, dateObj, "The date must not be modified");
+				});
+				
+				//Usando Date
+				test("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a", function() {
+					var dateFormat = new JSDateFormat("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a%a %WEEK");
+					var dateObj = new Date(2001, 7, 9, 9, 7, 8);
+					var originalDateObj = cloneDate(dateObj);
+					var formatted = dateFormat.format(dateObj);
+					var expectedRes = "09/08/001 09:07:08 AM Quinta-Feira";
+					
+					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					same(originalDateObj, dateObj, "The date must not be modified");
+				});
+				
+				//Usando millis
+				test("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a - Millis", function() {
+					var dateFormat = new JSDateFormat("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a%a %WEEK");
+					var dateObj = new Date(2001, 7, 9, 9, 7, 8);
+					var originalDateObj = cloneDate(dateObj);
+					var formatted = dateFormat.format(dateObj.getTime());
+					var expectedRes = "09/08/001 09:07:08 AM Quinta-Feira";
+					
+					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					same(originalDateObj, dateObj, "The date must not be modified");
+				});
+				
+				//Millis em String
+				test("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a - Millis as string", function() {
+					var dateFormat = new JSDateFormat("%d%d/%M%M/%y%y%y %H%H:%m%m:%s%s %a%a%a %WEEK");
+					var dateObj = new Date(2001, 7, 9, 9, 7, 8);
+					var originalDateObj = cloneDate(dateObj);
+					var formatted = dateFormat.format(dateObj.getTime() + "");
+					var expectedRes = "09/08/001 09:07:08 AM Quinta-Feira";
+					
+					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					same(originalDateObj, dateObj, "The date must not be modified");
+				});
+				
+				var template = "Now is day %d%d, the month is %m%M from year %y%y%y%y! The time is %H%Hh and %m%mm with %s%s secs (%a%a). The week day is %WEEK";
+				test(template, function() {
+					var date = new Date(2015, 0, 12, 20, 49, 23, 881);
+					var originalDate = cloneDate(date);
+					var formatted = new JSDateFormat(template).format(date);
+					var expectedRes = (function() {
+						var ret = template.replaceAll("%d%d", "12");
+						ret = ret.replaceAll("%M%M", "01");
+						ret = ret.replaceAll("%y%y%y%y", "2015");
+						ret = ret.replaceAll("%H%H", "20");
+						ret = ret.replaceAll("%m%m", "49");
+						ret = ret.replaceAll("%s%s", "23");
+						ret = ret.replaceAll("%a%a", "PM");
+						ret = ret.replaceAll("%WEEK", "Segunda-Feira");
+						return ret;
+					})();
+					
+					same(formatted, expectedRes, "The formated date must be -> " + expectedRes);
+				});
+				
+				test("Ignore format when there's no template", function() {
+					same(new JSDateFormat().format(new Date()), "", "The value must be empty and a log msg should appear");
+				});
+				
+				test("Ignore format when there's no value to format", function() {
+					same(new JSDateFormat("%d").format(), "", "The value must be empty and a log msg should appear");
+				});
+				
+				test("Ignore format when the value to format is invalid (null)", function() {
+					same(new JSDateFormat("%d").format(null), "", "The value must be empty and a log msg should appear");
+				});
+				
+				test("Ignore format when the value to format is invalid (undefined)", function() {
+					same(new JSDateFormat("%d").format(undefined), "", "The value must be empty and a log msg should appear");
+				});
+				
+				test("Ignore format when the value to format is invalid (random string)", function() {
+					same(new JSDateFormat("%d").format("Um valor que n�o vale"), "", "The value must be empty and a log msg should appear");
+				});
+				
+				test("Ignore format when the value to format is invalid (Invalid Date)", function() {
+					same(new JSDateFormat("%d").format(new Date("foo")), "", "The value must be empty and a log msg should appear");
+				});
+				
+				module("Millis Parse");
+				test("Converting millis in date object giving a Number", function() {
+					var dateRef = new Date();
+					var millis = cloneDate(dateRef).getTime();
+					var date = new JSDateFormat().getDateObj(millis);
+					
+					same(date, dateRef, "As datas devem ser iguais");
+				});
+				
+				test("Converting millis in date object giving a String", function() {
+					var dateRef = new Date();
+					var millis = cloneDate(dateRef).getTime().toString();
+					var date = new JSDateFormat().getDateObj(millis);
+					
+					same(date, dateRef, "As datas devem ser iguais");
+				});
+				
+				module("Date Parse com BaseDate");
+				
+				test("Parse the current hour", function() {
+					
+					var dateNow = new Date();
+					var date = defaultDateFormat.getDateObj("08:50", true);
+					
+					same(date.getDate(), dateNow.getDate(), "The day must be " + dateNow.getDate());
+					same(date.getMonth(), dateNow.getMonth(), "The month (0 index) must be " + dateNow.getMonth());
+					same(date.getFullYear(), dateNow.getFullYear(), "The year must be " + dateNow.getFullYear());
+					
+					same(date.getHours(), 8, "A hora deve ser 8");
+					same(date.getMinutes(), 50, "Os minutos devem ser 50");
+				});
+				
+				test("Parse a custom Date", function() {
+					
+					var customDate = new Date(2020, 4, 18, 23, 47, 53, 263);
+					var date = defaultDateFormat.getDateObj("17:09", customDate);
+					
+					same(date.getDate(), customDate.getDate(), "The day must be " + customDate.getDate());
+					same(date.getMonth(), customDate.getMonth(), "The month (0 index) must be " + customDate.getMonth());
+					same(date.getFullYear(), customDate.getFullYear(), "The year must be " + customDate.getFullYear());
+					
+					same(date.getHours(), 17, "A hora deve ser 17");
+					same(date.getMinutes(), 9, "Os minutos devem ser 9");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1 id="qunit-header">QUnit Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		<div id="qunit-fixture">test markup</div>
+	</body>
+</html>
