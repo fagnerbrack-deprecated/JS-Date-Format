@@ -22,44 +22,44 @@
  * 
  * === JSDateFormat ===
  * == Suporta:
- * %d - Dia no mês (01, 02...20,21)
- * %M - Mês no ano (03, 04...11, 12)
- * %y - Ano (001990, 02008, 2009, 009, 09, 9)
- * %h - Hora AM/PM (00, 01...11, 12)
- * %H - Hora no dia (00, 01...17, 18)
- * %m - Minutos em hora (05, 06...50, 51...59, 60)
- * %s - Segundos em minuto (05, 06...50, 51...59, 60)
- * %a - Retorna o post/ante meridiem (AM, PM)
- * %WEEK - Dia da semana em pt/br (Domingo, Segunda-Feira...Sexta-Feira, Sábado)
+ * %d%d - Day of month (01, 02...20,21)
+ * %M%M - Month of Year (03, 04...11, 12)
+ * %y%y%y%y - Year (001990, 02008, 2009, 009, 09, 9)
+ * %h%h - Hour AM/PM (00, 01...11, 12)
+ * %H%H - Hour of day (00, 01...17, 18)
+ * %m%m - Minutes in hour (05, 06...50, 51...59, 60)
+ * %s%s - Seconds in minute (05, 06...50, 51...59, 60)
+ * %a%a - (AM, PM)
+ * %WEEK - Day of week according to the DAYS_OF_WEEK variable
  * 
- * == Converte:
- * millisegundos
+ * == Converts any:
+ * milliseconds
  * Date Object
  */
 function JSDateFormat(template) {
 	
+	//Edit your country days of week names
+	var DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	
+	//Don't edit anything below
 	var REGEX_TEMPLATE = new RegExp("^([0-9]{2})(([/|:|-]([0-9]{2}|[0-9]{4}))|([/|:|-]([0-9]{2}))?([/|:|-]([0-9]{2}|[0-9]{4})))$");
 	var REGEX_MILLIS = new RegExp("^(\-)?[0-9]+$");
-	var DAYS_OF_WEEK = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
 	var t = this;
 	
-	/**
-	 * Formata para o template especificado ao instanciar a classe
-	 */
 	t.format = function(valueToFormat) {
 		
 		if(!template) {
-			log('JSDateFormat:format(' + valueToFormat + ') - O template não foi definido');
+			log('JSDateFormat:format(' + valueToFormat + ') - The template has not been defined');
 			return "";
 		}
 		
 		if(!valueToFormat) {
-			log('JSDateFormat:format(' + valueToFormat + ') - Não foi passado nenhum valor para formatar');
+			log('JSDateFormat:format(' + valueToFormat + ') - There\'s no value to format');
 			return "";
 		}
 		
 		if($.type(valueToFormat) != 'date' && !isMillis(valueToFormat)) {
-			log('JSDateFormat:format(' + valueToFormat + ') - O valor passado para formatar é inválido');
+			log('JSDateFormat:format(' + valueToFormat + ') - The given value is invalid');
 			return "";
 		}
 		
@@ -67,7 +67,7 @@ function JSDateFormat(template) {
 		var retorno = template;
 		
 		if(isNaN(date.getTime())) {
-			log('JSDateFormat:format(' + valueToFormat + ') - O valor passado para formatar é um objeto date inválido (Invalid Date)');
+			log('JSDateFormat:format(' + valueToFormat + ') - The given value to format a date object is invalid (Invalid Date)');
 			return "";
 		}
 		
@@ -86,11 +86,10 @@ function JSDateFormat(template) {
 	}
 	
 	/**
-	 * Pega um formato de data e retorna o objeto Date()
-	 * @param val timestamp/millis a ser convertido em um objeto date
-	 * @param baseCurrDate Define se a data atual deve ser levado como base para a criação do objeto Date (somente timestamp).
-	 * 			Se for diferente de true o objeto date será criado com base no zeroDate()
-	 * Retorna null Se ocorrer alguma problema em fazer o parse
+	 * Given a date template it returns the date object
+	 * @param val timestamp/millis to be converted to a date object
+	 * @param baseCurrDate Define if the current date hould be taken as a bse to the creation of the Date Object (only timestamp)
+	 * @return null if any problem happens
 	 */
 	t.getDateObj = function(val, baseDate) {
 		var date = null;
@@ -103,19 +102,19 @@ function JSDateFormat(template) {
 	}
 	
 	/**
-	 * Transforma datas de string para um objeto Date()
+	 * Convert string date models to a date object
 	 * 
-	 * SUPORTA
+	 * SUPPORTS
 	 * 
-	 * Data:
-	 * xx/xx/xxxx - dia/mes/ano
-	 * xx-xx-xxxx - dis-mes-ano
+	 * Date:
+	 * xx/xx/xxxx - day/month/year
+	 * xx-xx-xxxx - day-month-year
 	 * 
-	 * Horário:
-	 * xx:xx - hora:minuto
-	 * xx:xx:xx - hora:minuto:segundo
+	 * Time:
+	 * xx:xx - hour:minute
+	 * xx:xx:xx - hour:minute:second
 	 * 
-	 * Data/Horário:
+	 * Date/Time:
 	 * xx/xx/xxxx xx:xx:xx
 	 * xx/xx/xxxx xx:xx
 	 * xx-xx-xxxx xx:xx:xx
@@ -140,34 +139,34 @@ function JSDateFormat(template) {
 		}
 		
 		/**
-		 * Se houver espaço o formato de data está dividido entre data e hora
-		 * Dá um split no espaço e verifica se é para analisar como data ou como hora
-		 * Depois seta o valor correspondente no objeto Date() e retorna ele
+		 * If there'a space the date format is divided between date and hour
+		 * Split the space and verify if it has to be treated as date or hour
+		 * After that, set the corresponding value to the Date Pbject and returns it
 		 */
 		for(var i = 0; i<array.length; i++) {
 			var string = array[i];
 			var matches = REGEX_TEMPLATE.exec(string);
 			
-			if(string.indexOf("/") !== -1 || string.indexOf("-") !== -1) { //Trabalhando com data
+			if(string.indexOf("/") !== -1 || string.indexOf("-") !== -1) { //Working with date
 				
 				var dia = matches[1];
 				var mes = matches[6];
 				var ano = matches[8];
 				
-				//Sempre setar na ordem ano -> mês -> dia
-				//Se setar primeiro o dia ele vai setar na data do clearTime (01 jan 1970 00:00:00 000)
-				//No caso o dia 29 de fevereiro vai pular para 01/03 no dia 01 jan 1970
+				//Always set in this order: year -> month -> day
+				//If you set first the day it will jump to 01 jan 1970 00:00:00 000
+				//If it is feb/29 according to the Leap Year it will jump to March/1st
 				if(ano) { date.setFullYear(+ano); }
 				if(mes) { date.setMonth((+mes - 1)); }
 				if(dia) { date.setDate(+dia); }
 				
-			} else if(string.indexOf(":") != -1) { //Trabalhando com horário
-				var hora = matches[1]; //0-23 (Não suporta hora do dia)
-				var minutos = matches[4] || matches[6]; //0-59 - Se passar XX:XX casa no índice 4, se passar XX:XX:XX casa no índice 6
+			} else if(string.indexOf(":") != -1) { //Working with time
+				var hora = matches[1]; //0-23 (There's no support for hour of day)
+				var minutos = matches[4] || matches[6]; //0-59 - If you pass XX:XX it will match the char in the index 4. If you pass XX:XX:XX it will match on index 6
 				var segundos = matches[8]; //0-59
 				
 				if(hora && hora.length == 2) {
-					//Ao fazer o setHours(0) usa o clearTime para zerar a hora de acordo com o horário de verão
+					//Instead of setting setHours(0) use the clearTime util to reset the hour according to the daylight saving time
 					if(+hora === 0) {
 						clearTime(date);
 					} else {
@@ -185,9 +184,7 @@ function JSDateFormat(template) {
 	return date;
 	}
 	
-	/**
-	 * faz a substituição do template
-	 */
+	//Make the template substitution
 	function go(tmpl, valor, reg, ignorePad) {
 		var match = reg.exec(tmpl);
 		if(match && match.length) {
@@ -201,10 +198,8 @@ function JSDateFormat(template) {
 		return tmpl;
 	}
 	
-	/**
-	 * Verifica se a string passada possui um formato de template de data
-	 * Ex.: "18/10/2015" - "15:14" - "15 AM" - "23:49:31"
-	 */
+	//Verifiy if the data passed has a valid format
+	//Like: "18/10/2015" - "15:14" - "15 AM" - "23:49:31"
 	function isTemplate(str) {
 		
 		var retorno = false;
@@ -219,7 +214,7 @@ function JSDateFormat(template) {
 			
 			if(arr) {
 				if(arr.length === 2) {
-					//Manualmente analisa o formato com um espaço (XX/XX/XXXX XX:XX)
+					//Manualmente analisa o formato com um espaï¿½o (XX/XX/XXXX XX:XX)
 					retorno = REGEX_TEMPLATE.exec(arr[0]) && REGEX_TEMPLATE.exec(arr[1]);
 				} else {
 					retorno = REGEX_TEMPLATE.exec(arr[0]);
@@ -229,10 +224,8 @@ function JSDateFormat(template) {
 	return retorno;
 	}
 	
-	/**
-	 * Verifica se o argumento passado possui um formato de millisegundo (só números)
-	 * Ex.: "216516515611" - "16892655441451"
-	 */
+	//Verify if str has a valid millis format
+	//Like: "216516515611" - "16892655441451"
 	function isMillis(str) {
 		if($.type(str) != 'string') {
 			if(str.toString) {
