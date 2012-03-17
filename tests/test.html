@@ -220,7 +220,7 @@
 					same(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
-				var template = "Now is day %d%d, the month is %m%M from year %y%y%y%y! The time is %H%Hh and %m%mm with %s%s secs (%a%a). The week day is %WEEK";
+				var template = "Now is day %d%d, the month is %M%M from year %y%y%y%y! The time is %H%Hh and %m%mm with %s%s secs (%a%a). The week day is %WEEK";
 				test(template, function() {
 					var date = new Date(2015, 0, 12, 20, 49, 23, 881);
 					var originalDate = cloneDate(date);
