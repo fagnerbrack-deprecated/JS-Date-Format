@@ -24,16 +24,8 @@ function cloneDate(d, dontKeepTime) {
 	return dontKeepTime? clearTime(new Date(+d)): new Date(+d);
 };
 String.prototype.removeString = function(token, ignoreCase) {
-	var str = this.toString();
-	if(str) {
-		str = str.replaceAll(token, '', ignoreCase);
-	}
-return str;
+	return this.replaceAll(token, "", ignoreCase);
 };
-/**
- * ReplaceAll by Fagner Brack (MIT Licensed)
- * Replaces all occurrences of a substring in a string
- */
 String.prototype.replaceAll = function(token, newToken, ignoreCase) {
 	var str, i = -1, _token;
 	if((str = this.toString()) && typeof token === "string") {
