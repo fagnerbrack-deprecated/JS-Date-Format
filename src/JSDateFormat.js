@@ -103,17 +103,21 @@ function JSDateFormat(template) {
 	 * xx-xx-xxxx xx:xx
 	 */
 	function parseTemplate(str, baseDate) {
-		var date = null;
+		var date, array, i, string, matches, 
+			day, month, year, hours, minutes, seconds;
 		
-		if(baseDate === true) {
-			date = new Date();
-		} else if($.type(baseDate) == 'date' && !isNaN(baseDate.getTime())) {
-			date = cloneDate(baseDate);
+		if(baseDate !== undefined) {
+			if(baseDate === true) {
+				date = new Date();
+			} else if(baseDate && Object.prototype.toString.call(baseDate) === "[object Date]" && baseDate.getTime()) {
+				date = cloneDate(baseDate);
+			} else {
+				throw new TypeError("JSDateFormat: The baseDate is invalid");
+			}
 		} else {
 			date = zeroDate();
 		}
 		
-		var array = null;
 		if(str.indexOf(" ") === -1) {
 			array = [str];
 		} else {
@@ -125,42 +129,44 @@ function JSDateFormat(template) {
 		 * Split the space and verify if it has to be treated as date or hour
 		 * After that, set the corresponding value to the Date Pbject and returns it
 		 */
-		for(var i = 0; i<array.length; i++) {
-			var string = array[i];
-			var matches = REGEX_TEMPLATE.exec(string);
+		for(i = 0; i<array.length; i++) {
+			string = array[i];
+			matches = REGEX_TEMPLATE.exec(string);
 			
 			if(string.indexOf("/") !== -1 || string.indexOf("-") !== -1) { //Working with date
 				
-				var dia = matches[1];
-				var mes = matches[6];
-				var ano = matches[8];
+				day = matches[1];
+				month = matches[6];
+				year = matches[8];
 				
 				//Always set in this order: year -> month -> day
 				//If you set first the day it will jump to 01 jan 1970 00:00:00 000
 				//If it is feb/29 according to the Leap Year it will jump to March/1st
-				if(ano) { date.setFullYear(+ano); }
-				if(mes) { date.setMonth((+mes - 1)); }
-				if(dia) { date.setDate(+dia); }
+				if(year) { date.setFullYear(+year); }
+				if(month) { date.setMonth((+month - 1)); }
+				if(day) { date.setDate(+day); }
 				
 			} else if(string.indexOf(":") != -1) { //Working with time
-				var hora = matches[1]; //0-23 (There's no support for hour of day)
-				var minutos = matches[4] || matches[6]; //0-59 - If you pass XX:XX it will match the char in the index 4. If you pass XX:XX:XX it will match on index 6
-				var segundos = matches[8]; //0-59
+				hours = matches[1]; //0-23 (There's no support for hour of day)
+				minutes = matches[4] || matches[6]; //0-59 - If you pass XX:XX it will match the char in the index 4. If you pass XX:XX:XX it will match on index 6
+				seconds = matches[8]; //0-59
 				
-				if(hora && hora.length == 2) {
+				if(hours && hours.length == 2) {
 					//Instead of setting setHours(0) use the clearTime util to reset the hour according to the daylight saving time
-					if(+hora === 0) {
+					if(+hours === 0) {
 						clearTime(date);
 					} else {
-						date.setHours(+hora);
+						date.setHours(+hours);
 					}
 				}
 				
-				if(minutos && minutos.length == 2)
-					date.setMinutes(+minutos);
+				if(minutes && minutes.length == 2) {
+					date.setMinutes(+minutes);
+				}
 					
-				if(segundos && segundos.length == 2)
-					date.setSeconds(+segundos);
+				if(seconds && seconds.length == 2) {
+					date.setSeconds(+seconds);
+				}
 			}
 		}
 	return date;
@@ -184,7 +190,7 @@ function JSDateFormat(template) {
 	//Like: "18/10/2015" - "15:14" - "15 AM" - "23:49:31"
 	function isTemplate(str) {
 		
-		var retorno = false;
+		var ret = false;
 		if($.type(str) === 'string') {
 			
 			var arr = null;
@@ -196,13 +202,13 @@ function JSDateFormat(template) {
 			
 			if(arr) {
 				if(arr.length === 2) {
-					retorno = REGEX_TEMPLATE.exec(arr[0]) && REGEX_TEMPLATE.exec(arr[1]);
+					ret = REGEX_TEMPLATE.exec(arr[0]) && REGEX_TEMPLATE.exec(arr[1]);
 				} else {
-					retorno = REGEX_TEMPLATE.exec(arr[0]);
+					ret = REGEX_TEMPLATE.exec(arr[0]);
 				}
 			}
 		}
-	return retorno;
+	return ret;
 	}
 	
 	//Verify if str has a valid millis format

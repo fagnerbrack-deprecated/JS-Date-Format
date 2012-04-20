@@ -268,7 +268,7 @@
 					var millis = cloneDate(dateRef).getTime();
 					var date = new JSDateFormat().getDateObj(millis);
 					
-					same(date, dateRef, "As datas devem ser iguais");
+					same(date, dateRef, "The dates should be the same");
 				});
 				
 				test("Converting millis in date object giving a String", function() {
@@ -276,11 +276,10 @@
 					var millis = cloneDate(dateRef).getTime().toString();
 					var date = new JSDateFormat().getDateObj(millis);
 					
-					same(date, dateRef, "As datas devem ser iguais");
+					same(date, dateRef, "The dates should be the same");
 				});
 				
-				module("Date Parse com BaseDate");
-				
+				module("Date Parse with BaseDate");
 				test("Parse the current hour", function() {
 					
 					var dateNow = new Date();
@@ -290,8 +289,8 @@
 					same(date.getMonth(), dateNow.getMonth(), "The month (0 index) must be " + dateNow.getMonth());
 					same(date.getFullYear(), dateNow.getFullYear(), "The year must be " + dateNow.getFullYear());
 					
-					same(date.getHours(), 8, "A hora deve ser 8");
-					same(date.getMinutes(), 50, "Os minutos devem ser 50");
+					same(date.getHours(), 8, "The hour should be 8");
+					same(date.getMinutes(), 50, "The minutes should be 50");
 				});
 				
 				test("Parse a custom Date", function() {
@@ -303,8 +302,20 @@
 					same(date.getMonth(), customDate.getMonth(), "The month (0 index) must be " + customDate.getMonth());
 					same(date.getFullYear(), customDate.getFullYear(), "The year must be " + customDate.getFullYear());
 					
-					same(date.getHours(), 17, "A hora deve ser 17");
-					same(date.getMinutes(), 9, "Os minutos devem ser 9");
+					same(date.getHours(), 17, "The hour should be 17");
+					same(date.getMinutes(), 9, "The minutes should be 9");
+				});
+				
+				test("ignore if baseDate is an invalid date", function() {
+					var invalidDate = new Date("invalid");
+					
+					raises(function() {
+						defaultDateFormat.getDateObj("15:15", invalidDate);
+					}, TypeError, "Should throw a TypeError when baseDate is especified but is invalid");
+					
+					raises(function() {
+						defaultDateFormat.getDateObj("15:15", null);
+					}, TypeError, "Should throw a TypeError when baseDate is null");
 				});
 			});
 		</script>
