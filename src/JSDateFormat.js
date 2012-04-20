@@ -196,7 +196,6 @@ function JSDateFormat(template) {
 			
 			if(arr) {
 				if(arr.length === 2) {
-					//Manualmente analisa o formato com um espa�o (XX/XX/XXXX XX:XX)
 					retorno = REGEX_TEMPLATE.exec(arr[0]) && REGEX_TEMPLATE.exec(arr[1]);
 				} else {
 					retorno = REGEX_TEMPLATE.exec(arr[0]);
