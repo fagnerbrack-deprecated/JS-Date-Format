@@ -214,7 +214,7 @@ function JSDateFormat(template) {
 	//Verify if str has a valid millis format
 	//Like: "216516515611" - "16892655441451"
 	function isMillis(str) {
-		if($.type(str) != 'string') {
+		if(typeof str !== "string") {
 			if(str.toString) {
 				str = str.toString();
 			} else {
