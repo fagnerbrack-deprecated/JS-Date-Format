@@ -93,7 +93,7 @@
 		/**
 		 * Convert string date models to a date object
 		 * 
-		 * SUPPORTS
+		 * SUPPORTS (only PT/BR format)
 		 * 
 		 * Date:
 		 * xx/xx/xxxx - day/month/year
