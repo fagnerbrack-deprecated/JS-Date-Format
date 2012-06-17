@@ -1,6 +1,6 @@
 JS Date Format
 ==============================
-*Requires [utils]()*
+*Requires [utils](https://github.com/FagnerMartinsBrack/jQuery-Table-Filter/blob/master/src/utils.js)*
 
 JSDateFormat helps you to format/parse your Date
 
@@ -26,5 +26,5 @@ Format
 
 Changelog
 --------
-1.0 - Initial release
-1.0.1 - Code style change and some minor modifications.
+* 1.0 - Initial release
+* 1.0.1 - Code style change and some minor modifications.
