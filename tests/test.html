@@ -4,10 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Unit Test</title>
 		
-		<link rel="stylesheet" href="../qunit/main.css" media="all" charset="UTF-8" />
 		<link rel="stylesheet" href="../qunit/qunit.css" media="all" charset="UTF-8" />
 		
-		<script language="Javascript" type="text/javascript" src="../lib/jquery.1.7.1.js"></script>
+		<script language="Javascript" type="text/javascript" src="../qunit/jquery.js"></script>
 		<script language="Javascript" type="text/javascript" src="../qunit/qunit.js"></script>
 		<script language="Javascript" type="text/javascript" src="../src/utils.js"></script>
 		<script language="Javascript" type="text/javascript" src="../src/JSDateFormat.js"></script>
@@ -20,144 +19,144 @@
 				test("29/02/2012 - Leap Year", function() {
 					var date = defaultDateFormat.getDateObj("29/02/2012");
 					
-					same(date.getDate(), 29, "The day is correct");
-					same(date.getMonth(), 1, "The month is correct");
-					same(date.getFullYear(), 2012, "The year is correct");
+					deepEqual(date.getDate(), 29, "The day is correct");
+					deepEqual(date.getMonth(), 1, "The month is correct");
+					deepEqual(date.getFullYear(), 2012, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 0, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 0, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("26-02-2012", function() {
 					var date = defaultDateFormat.getDateObj("26-02-2012");
 					
-					same(date.getDate(), 26, "The day is correct");
-					same(date.getMonth(), 1, "The month is correct");
-					same(date.getFullYear(), 2012, "The year is correct");
+					deepEqual(date.getDate(), 26, "The day is correct");
+					deepEqual(date.getMonth(), 1, "The month is correct");
+					deepEqual(date.getFullYear(), 2012, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 0, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 0, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("25/02/2012 00:35", function() {
 					var date = defaultDateFormat.getDateObj("25/02/2012 00:35");
 					
-					same(date.getDate(), 25, "The day is correct");
-					same(date.getMonth(), 1, "The month is correct");
-					same(date.getFullYear(), 2012, "The year is correct");
+					deepEqual(date.getDate(), 25, "The day is correct");
+					deepEqual(date.getMonth(), 1, "The month is correct");
+					deepEqual(date.getFullYear(), 2012, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 35, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 35, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("26-02-2012 00:59", function(){
 					var date = defaultDateFormat.getDateObj("26-02-2012 00:59");
 					
-					same(date.getDate(), 26, "The day is correct");
-					same(date.getMonth(), 1, "The month is correct");
-					same(date.getFullYear(), 2012, "The year is correct");
+					deepEqual(date.getDate(), 26, "The day is correct");
+					deepEqual(date.getMonth(), 1, "The month is correct");
+					deepEqual(date.getFullYear(), 2012, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 59, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 59, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("18/10/2011 00:45:54", function(){
 					var date = defaultDateFormat.getDateObj("18/10/2011 00:45:54");
 					
-					same(date.getDate(), 18, "The day is correct");
-					same(date.getMonth(), 9, "The month is correct");
-					same(date.getFullYear(), 2011, "The year is correct");
+					deepEqual(date.getDate(), 18, "The day is correct");
+					deepEqual(date.getMonth(), 9, "The month is correct");
+					deepEqual(date.getFullYear(), 2011, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 45, "The minutes are correct");
-					same(date.getSeconds(), 54, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 45, "The minutes are correct");
+					deepEqual(date.getSeconds(), 54, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("17-10-2011 00:31:28", function(){
 					var date = defaultDateFormat.getDateObj("17-10-2011 00:31:28");
 					
-					same(date.getDate(), 17, "The day is correct");
-					same(date.getMonth(), 9, "The month is correct");
-					same(date.getFullYear(), 2011, "The year is correct");
+					deepEqual(date.getDate(), 17, "The day is correct");
+					deepEqual(date.getMonth(), 9, "The month is correct");
+					deepEqual(date.getFullYear(), 2011, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 31, "The minutes are correct");
-					same(date.getSeconds(), 28, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 31, "The minutes are correct");
+					deepEqual(date.getSeconds(), 28, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("09/08/2001 09:07:08 - Date/Hour with zeros at left", function() {
 					var date = defaultDateFormat.getDateObj("09/08/2001 09:07:08");
 					
-					same(date.getDate(), 9, "The day is correct");
-					same(date.getMonth(), 7, "The month is correct");
-					same(date.getFullYear(), 2001, "The year is correct");
+					deepEqual(date.getDate(), 9, "The day is correct");
+					deepEqual(date.getMonth(), 7, "The month is correct");
+					deepEqual(date.getFullYear(), 2001, "The year is correct");
 					
-					same(date.getHours(), 9, "The hour is correct");
-					same(date.getMinutes(), 7, "The minutes are correct");
-					same(date.getSeconds(), 8, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 9, "The hour is correct");
+					deepEqual(date.getMinutes(), 7, "The minutes are correct");
+					deepEqual(date.getSeconds(), 8, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("08:07 - Hours/Minutes with zeros at left", function() {
 					var date = defaultDateFormat.getDateObj("08:07");
 					
-					same(date.getDate(), 1, "The day is correct");
-					same(date.getMonth(), 0, "The month is correct");
-					same(date.getFullYear(), 1970, "The year is correct");
+					deepEqual(date.getDate(), 1, "The day is correct");
+					deepEqual(date.getMonth(), 0, "The month is correct");
+					deepEqual(date.getFullYear(), 1970, "The year is correct");
 					
-					same(date.getHours(), 8, "The hour is correct");
-					same(date.getMinutes(), 7, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 8, "The hour is correct");
+					deepEqual(date.getMinutes(), 7, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("09:04:08 - Hour, minutes and seconds with zeros at left", function() {
 					var date = defaultDateFormat.getDateObj("09:04:08");
 					
-					same(date.getDate(), 1, "The day is correct");
-					same(date.getMonth(), 0, "The month is correct");
-					same(date.getFullYear(), 1970, "The year is correct");
+					deepEqual(date.getDate(), 1, "The day is correct");
+					deepEqual(date.getMonth(), 0, "The month is correct");
+					deepEqual(date.getFullYear(), 1970, "The year is correct");
 					
-					same(date.getHours(), 9, "The hour is correct");
-					same(date.getMinutes(), 4, "The minutes are correct");
-					same(date.getSeconds(), 8, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 9, "The hour is correct");
+					deepEqual(date.getMinutes(), 4, "The minutes are correct");
+					deepEqual(date.getSeconds(), 8, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("23:59:59", function() {
 					var date = defaultDateFormat.getDateObj("23:59:59");
 					
-					same(date.getDate(), 1, "The day is correct");
-					same(date.getMonth(), 0, "The month is correct");
-					same(date.getFullYear(), 1970, "The year is correct");
+					deepEqual(date.getDate(), 1, "The day is correct");
+					deepEqual(date.getMonth(), 0, "The month is correct");
+					deepEqual(date.getFullYear(), 1970, "The year is correct");
 					
-					same(date.getHours(), 23, "The hour is correct");
-					same(date.getMinutes(), 59, "The minutes are correct");
-					same(date.getSeconds(), 59, "Os segundos estao corretos");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 23, "The hour is correct");
+					deepEqual(date.getMinutes(), 59, "The minutes are correct");
+					deepEqual(date.getSeconds(), 59, "Os segundos estao corretos");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				test("00:00:00 - Hour reset", function() {
 					var date = defaultDateFormat.getDateObj("00:00:00");
 					
-					same(date.getDate(), 1, "The day is correct");
-					same(date.getMonth(), 0, "The month is correct");
-					same(date.getFullYear(), 1970, "The year is correct");
+					deepEqual(date.getDate(), 1, "The day is correct");
+					deepEqual(date.getMonth(), 0, "The month is correct");
+					deepEqual(date.getFullYear(), 1970, "The year is correct");
 					
-					same(date.getHours(), 0, "The hour is correct");
-					same(date.getMinutes(), 0, "The minutes are correct");
-					same(date.getSeconds(), 0, "The seconds are correct");
-					same(date.getMilliseconds(), 0, "The millis are correct");
+					deepEqual(date.getHours(), 0, "The hour is correct");
+					deepEqual(date.getMinutes(), 0, "The minutes are correct");
+					deepEqual(date.getSeconds(), 0, "The seconds are correct");
+					deepEqual(date.getMilliseconds(), 0, "The millis are correct");
 				});
 				
 				module("Date Format");
@@ -167,8 +166,8 @@
 					var originalDateObj = cloneDate(dateObj);
 					var formatted = dateFormat.format(dateObj);
 					
-					same(formatted, "04/06/1998", "The formatted date is correct");
-					same(originalDateObj, dateObj, "The date must not be modified");
+					deepEqual(formatted, "04/06/1998", "The formatted date is correct");
+					deepEqual(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
 				test("%d%d%d-%M%M%M%M-%y%y %H%H:%m%m", function() {
@@ -178,8 +177,8 @@
 					var formatted = dateFormat.format(dateObj);
 					var expectedRes = "030-0011-12 00:00";
 					
-					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
-					same(originalDateObj, dateObj, "The date must not be modified");
+					deepEqual(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					deepEqual(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
 				//Usando Date
@@ -190,8 +189,8 @@
 					var formatted = dateFormat.format(dateObj);
 					var expectedRes = "09/08/001 09:07:08 AM Thursday";
 					
-					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
-					same(originalDateObj, dateObj, "The date must not be modified");
+					deepEqual(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					deepEqual(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
 				//Usando millis
@@ -202,8 +201,8 @@
 					var formatted = dateFormat.format(dateObj.getTime());
 					var expectedRes = "09/08/001 09:07:08 AM Thursday";
 					
-					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
-					same(originalDateObj, dateObj, "The date must not be modified");
+					deepEqual(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					deepEqual(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
 				//Millis em String
@@ -214,8 +213,8 @@
 					var formatted = dateFormat.format(dateObj.getTime() + "");
 					var expectedRes = "09/08/001 09:07:08 AM Thursday";
 					
-					same(formatted, expectedRes, "The formatted date must be " + expectedRes);
-					same(originalDateObj, dateObj, "The date must not be modified");
+					deepEqual(formatted, expectedRes, "The formatted date must be " + expectedRes);
+					deepEqual(originalDateObj, dateObj, "The date must not be modified");
 				});
 				
 				var template = "Now is day %d%d, the month is %M%M from year %y%y%y%y! The time is %H%Hh and %m%mm with %s%s secs (%a%a). The week day is %WEEK";
@@ -235,31 +234,31 @@
 						return ret;
 					})();
 					
-					same(formatted, expectedRes, "The formated date must be -> " + expectedRes);
+					deepEqual(formatted, expectedRes, "The formated date must be -> " + expectedRes);
 				});
 				
 				test("Ignore format when there's no template", function() {
-					same(new JSDateFormat().format(new Date()), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat().format(new Date()), "", "The value must be empty and a log msg should appear");
 				});
 				
 				test("Ignore format when there's no value to format", function() {
-					same(new JSDateFormat("%d").format(), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat("%d").format(), "", "The value must be empty and a log msg should appear");
 				});
 				
 				test("Ignore format when the value to format is invalid (null)", function() {
-					same(new JSDateFormat("%d").format(null), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat("%d").format(null), "", "The value must be empty and a log msg should appear");
 				});
 				
 				test("Ignore format when the value to format is invalid (undefined)", function() {
-					same(new JSDateFormat("%d").format(undefined), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat("%d").format(undefined), "", "The value must be empty and a log msg should appear");
 				});
 				
 				test("Ignore format when the value to format is invalid (random string)", function() {
-					same(new JSDateFormat("%d").format("Um valor que n�o vale"), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat("%d").format("Um valor que n�o vale"), "", "The value must be empty and a log msg should appear");
 				});
 				
 				test("Ignore format when the value to format is invalid (Invalid Date)", function() {
-					same(new JSDateFormat("%d").format(new Date("foo")), "", "The value must be empty and a log msg should appear");
+					deepEqual(new JSDateFormat("%d").format(new Date("foo")), "", "The value must be empty and a log msg should appear");
 				});
 				
 				module("Millis Parse");
@@ -268,7 +267,7 @@
 					var millis = cloneDate(dateRef).getTime();
 					var date = new JSDateFormat().getDateObj(millis);
 					
-					same(date, dateRef, "The dates should be the same");
+					deepEqual(date, dateRef, "The dates should be the same");
 				});
 				
 				test("Converting millis in date object giving a String", function() {
@@ -276,7 +275,7 @@
 					var millis = cloneDate(dateRef).getTime().toString();
 					var date = new JSDateFormat().getDateObj(millis);
 					
-					same(date, dateRef, "The dates should be the same");
+					deepEqual(date, dateRef, "The dates should be the same");
 				});
 				
 				module("Date Parse with BaseDate");
@@ -285,12 +284,12 @@
 					var dateNow = new Date();
 					var date = defaultDateFormat.getDateObj("08:50", true);
 					
-					same(date.getDate(), dateNow.getDate(), "The day must be " + dateNow.getDate());
-					same(date.getMonth(), dateNow.getMonth(), "The month (0 index) must be " + dateNow.getMonth());
-					same(date.getFullYear(), dateNow.getFullYear(), "The year must be " + dateNow.getFullYear());
+					deepEqual(date.getDate(), dateNow.getDate(), "The day must be " + dateNow.getDate());
+					deepEqual(date.getMonth(), dateNow.getMonth(), "The month (0 index) must be " + dateNow.getMonth());
+					deepEqual(date.getFullYear(), dateNow.getFullYear(), "The year must be " + dateNow.getFullYear());
 					
-					same(date.getHours(), 8, "The hour should be 8");
-					same(date.getMinutes(), 50, "The minutes should be 50");
+					deepEqual(date.getHours(), 8, "The hour should be 8");
+					deepEqual(date.getMinutes(), 50, "The minutes should be 50");
 				});
 				
 				test("Parse a custom Date", function() {
@@ -298,12 +297,12 @@
 					var customDate = new Date(2020, 4, 18, 23, 47, 53, 263);
 					var date = defaultDateFormat.getDateObj("17:09", customDate);
 					
-					same(date.getDate(), customDate.getDate(), "The day must be " + customDate.getDate());
-					same(date.getMonth(), customDate.getMonth(), "The month (0 index) must be " + customDate.getMonth());
-					same(date.getFullYear(), customDate.getFullYear(), "The year must be " + customDate.getFullYear());
+					deepEqual(date.getDate(), customDate.getDate(), "The day must be " + customDate.getDate());
+					deepEqual(date.getMonth(), customDate.getMonth(), "The month (0 index) must be " + customDate.getMonth());
+					deepEqual(date.getFullYear(), customDate.getFullYear(), "The year must be " + customDate.getFullYear());
 					
-					same(date.getHours(), 17, "The hour should be 17");
-					same(date.getMinutes(), 9, "The minutes should be 9");
+					deepEqual(date.getHours(), 17, "The hour should be 17");
+					deepEqual(date.getMinutes(), 9, "The minutes should be 9");
 				});
 				
 				test("ignore if baseDate is an invalid date", function() {
