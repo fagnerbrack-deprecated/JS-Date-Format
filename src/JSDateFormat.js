@@ -1,5 +1,7 @@
 (function(window, undefined) {
 	
+	"use strict";
+	
 	//Edit your country days of week names
 	var DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	
@@ -7,54 +9,59 @@
 	window.JSDateFormat = JSDateFormat;
 	
 	/**
-	 * JS Date Format 1.0.1
-	 * (c) 2010-2012 Fagner Martins Brack <fagnerbrack.com>
-	 * MIT license
-	 * 
-	 * == Supports:
-	 * %d%d - Day of month (01, 02...20,21)
-	 * %M%M - Month of Year (03, 04...11, 12)
-	 * %y%y%y%y - Year (001990, 02008, 2009, 009, 09, 9)
-	 * %h%h - Hour AM/PM (00, 01...11, 12)
-	 * %H%H - Hour of day (00, 01...17, 18)
-	 * %m%m - Minutes in hour (05, 06...50, 51...59, 60)
-	 * %s%s - Seconds in minute (05, 06...50, 51...59, 60)
-	 * %a%a - (AM, PM)
-	 * %WEEK - Day of week according to the DAYS_OF_WEEK variable
-	 * 
-	 * == Converts any:
-	 * milliseconds
-	 * Date Object
-	 */
+	* JS Date Format 1.0.2
+	* (c) 2010-2012 Fagner Martins Brack <fagnerbrack.com>
+	* MIT license
+	* 
+	* == Supports:
+	* %d%d - Day of month (01, 02...20,21)
+	* %M%M - Month of Year (03, 04...11, 12)
+	* %y%y%y%y - Year (001990, 02008, 2009, 009, 09, 9)
+	* %h%h - Hour AM/PM (00, 01...11, 12)
+	* %H%H - Hour of day (00, 01...17, 18)
+	* %m%m - Minutes in hour (05, 06...50, 51...59, 60)
+	* %s%s - Seconds in minute (05, 06...50, 51...59, 60)
+	* %a%a - (AM, PM)
+	* %WEEK - Day of week according to the DAYS_OF_WEEK variable
+	* 
+	* == Converts any:
+	* milliseconds
+	* Date Object
+	*/
 	function JSDateFormat(template) {
 		
 		var REGEX_TEMPLATE = new RegExp("^([0-9]{2})(([/|:|-]([0-9]{2}|[0-9]{4}))|([/|:|-]([0-9]{2}))?([/|:|-]([0-9]{2}|[0-9]{4})))$"),
-			REGEX_MILLIS = new RegExp("^(\-)?[0-9]+$"),
-			t = this;
+			REGEX_MILLIS = new RegExp("^(\\-)?[0-9]+$"),
+			self = this,
+			console = window.console;
 		
-		t.format = function(valueToFormat) {
+		self.format = function(valueToFormat) {
 			
 			var date, ret;
 			
 			if( !template ) {
-				log("JSDateFormat:format(" + valueToFormat + ") - The template has not been defined");
+				console && 
+					console.log("JSDateFormat:format(" + valueToFormat + ") - The template has not been defined");
 				return "";
 			}
 			
 			if( !valueToFormat ) {
-				log("JSDateFormat:format(" + valueToFormat + ") - There's no value to format");
+				console && 
+					console.log("JSDateFormat:format(" + valueToFormat + ") - There's no value to format");
 				return "";
 			}
 			
 			if( $.type(valueToFormat) !== "date" && !isMillis(valueToFormat) ) {
-				log("JSDateFormat:format(" + valueToFormat + ") - The given value is invalid");
+				console && 
+					console.log("JSDateFormat:format(" + valueToFormat + ") - The given value is invalid");
 				return "";
 			}
 			
 			date = new Date( +valueToFormat );
 			
 			if( isNaN(date.getTime()) ) {
-				log("JSDateFormat:format(" + valueToFormat + ") - The given value to format a date object is invalid (Invalid Date)");
+				console && 
+					console.log("JSDateFormat:format(" + valueToFormat + ") - The given value to format a date object is invalid (Invalid Date)");
 				return "";
 			}
 			
@@ -72,15 +79,15 @@
 			ret = ret.replaceAll( "%WEEK", DAYS_OF_WEEK[date.getDay()] );
 			
 			return ret;
-		}
+		};
 		
 		/**
-		 * Given a date template it returns the date object
-		 * @param val timestamp/millis to be converted to a date object
-		 * @param baseCurrDate Define if the current date hould be taken as a bse to the creation of the Date Object (only timestamp)
-		 * @return {Date} The Date object or null if any problem happens
-		 */
-		t.getDateObj = function( val, baseDate ) {
+		* Given a date template it returns the date object
+		* @param val timestamp/millis to be converted to a date object
+		* @param baseCurrDate Define if the current date hould be taken as a bse to the creation of the Date Object (only timestamp)
+		* @return {Date} The Date object or null if any problem happens
+		*/
+		self.getDateObj = function( val, baseDate ) {
 			var date = null;
 			if( isMillis(val) ) {
 				date = new Date(+val);
@@ -88,27 +95,27 @@
 				date = parseTemplate( val, baseDate );
 			}
 		return date;
-		}
+		};
 		
 		/**
-		 * Convert string date models to a date object
-		 * 
-		 * SUPPORTS (only PT/BR format)
-		 * 
-		 * Date:
-		 * xx/xx/xxxx - day/month/year
-		 * xx-xx-xxxx - day-month-year
-		 * 
-		 * Time:
-		 * xx:xx - hour:minute
-		 * xx:xx:xx - hour:minute:second
-		 * 
-		 * Date/Time:
-		 * xx/xx/xxxx xx:xx:xx
-		 * xx/xx/xxxx xx:xx
-		 * xx-xx-xxxx xx:xx:xx
-		 * xx-xx-xxxx xx:xx
-		 */
+		* Convert string date models to a date object
+		* 
+		* SUPPORTS (only PT/BR format)
+		* 
+		* Date:
+		* xx/xx/xxxx - day/month/year
+		* xx-xx-xxxx - day-month-year
+		* 
+		* Time:
+		* xx:xx - hour:minute
+		* xx:xx:xx - hour:minute:second
+		* 
+		* Date/Time:
+		* xx/xx/xxxx xx:xx:xx
+		* xx/xx/xxxx xx:xx
+		* xx-xx-xxxx xx:xx:xx
+		* xx-xx-xxxx xx:xx
+		*/
 		function parseTemplate( str, baseDate ) {
 			var date, array, i, string, matches, 
 				day, month, year, hours, minutes, seconds;
@@ -132,10 +139,10 @@
 			}
 			
 			/**
-			 * If there'a space the date format is divided between date and hour
-			 * Split the space and verify if it has to be treated as date or hour
-			 * After that, set the corresponding value to the Date Pbject and returns it
-			 */
+			* If there'a space the date format is divided between date and hour
+			* Split the space and verify if it has to be treated as date or hour
+			* After that, set the corresponding value to the Date Pbject and returns it
+			*/
 			for( i = 0; i<array.length; i++ ) {
 				string = array[i];
 				matches = REGEX_TEMPLATE.exec(string);
@@ -150,12 +157,12 @@
 					if(month) { date.setMonth( (+month - 1) ); }
 					if(day) { date.setDate(+day); }
 					
-				} else if( string.indexOf(":") != -1 ) { //Working with time
+				} else if( string.indexOf(":") !== -1 ) { //Working with time
 					hours = matches[1]; //0-23 (There's no support for hour of day)
 					minutes = matches[4] || matches[6]; //0-59 - If you pass XX:XX it will match the char in the index 4. If you pass XX:XX:XX it will match on index 6
 					seconds = matches[8]; //0-59
 					
-					if( hours && hours.length == 2 ) {
+					if( hours && hours.length === 2 ) {
 						//Instead of setting setHours(0) use the clearTime util to reset the hour according to the daylight saving time
 						if( +hours === 0 ) {
 							clearTime(date);
@@ -164,11 +171,11 @@
 						}
 					}
 					
-					if( minutes && minutes.length == 2 ) {
+					if( minutes && minutes.length === 2 ) {
 						date.setMinutes(+minutes);
 					}
 						
-					if( seconds && seconds.length == 2 ) {
+					if( seconds && seconds.length === 2 ) {
 						date.setSeconds(+seconds);
 					}
 				}
@@ -234,8 +241,6 @@
 			
 		return false;
 		}
-		
-	return t;
 	}
 	
 })(window);
